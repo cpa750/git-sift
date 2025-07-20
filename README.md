@@ -27,3 +27,10 @@ $ cargo install --path .
 ```
 
 Alternatively, a Linux (x64) binary release is provided.
+
+## Why does this exist?
+To solve a problem I run into at work a lot. To be honest, something like:
+```
+git checkout "$(git branch --all --color=never | grep -v HEAD | sed 's#remotes/[^/]*/##' | sort -u | fzf)"
+```
+does the trick just as well. But, I've been wanting to learn me a bit of Rust and this seemed like a good way to do it so... here we are!
