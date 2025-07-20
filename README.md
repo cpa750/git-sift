@@ -3,6 +3,7 @@ A command line tool to help you `checkout` when you have too many branches to re
 
 `sift` is a command line tool that gives you a TUI to fuzzy-search your git branches, listing both local and remote branches.
 Checking out local branches behaves exactly as you'd expect. However, the behaviour of checking out a remote ref depends on the state of your repo.
+Optionally, you can append a command line parameter which will be used as the initial query.
 
 Checking out a remote-only ref sets up a local tracking branch and checks it out.
 Checking out a remote ref when there is a local tracking branch has two possible outcomes:

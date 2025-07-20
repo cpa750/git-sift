@@ -11,10 +11,13 @@ use crossterm::event::{KeyCode, KeyEvent, KeyModifiers};
 use git2::Error;
 use ratatui::backend::CrosstermBackend;
 use ratatui::Terminal;
+use std::env;
 use std::io::stdout;
 use std::result::Result;
 
 fn main() -> Result<(), Error> {
+    let initial_query = env::args().nth(1).unwrap_or_default();
+
     let git = GitManager::new();
     let all_branches: &Vec<String> = &git
         .local_branches
@@ -41,6 +44,7 @@ fn main() -> Result<(), Error> {
         keybinds,
         all_branches.to_vec(),
         terminal,
+        initial_query,
     );
     ui.run()
 }

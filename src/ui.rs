@@ -33,8 +33,8 @@ where
         keybinds: Keybinds,
         haystack: Vec<String>,
         terminal: Terminal<CrosstermBackend<&'a mut Stdout>>,
+        needle: String,
     ) -> Self {
-        let needle = String::new();
         let results = filter(&needle, &haystack).unwrap_or_default();
 
         Self {
