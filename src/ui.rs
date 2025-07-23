@@ -35,7 +35,14 @@ where
         terminal: Terminal<CrosstermBackend<&'a mut Stdout>>,
         needle: String,
     ) -> Self {
-        let results = filter(&needle, &haystack).unwrap_or_default();
+        let results = filter(
+            &needle
+                .chars()
+                .filter(|c| !c.is_whitespace())
+                .collect::<String>(),
+            &haystack,
+        )
+        .unwrap_or_default();
 
         Self {
             needle,
@@ -96,10 +103,24 @@ where
             }
         } else if let KeyCode::Char(c) = key.code {
             self.needle.push(c);
-            self.results = filter(&self.needle, &self.haystack)?;
+            self.results = filter(
+                &self
+                    .needle
+                    .chars()
+                    .filter(|c| !c.is_whitespace())
+                    .collect::<String>(),
+                &self.haystack,
+            )?;
         } else if key.code == KeyCode::Backspace {
             self.needle.pop();
-            self.results = filter(&self.needle, &self.haystack)?;
+            self.results = filter(
+                &self
+                    .needle
+                    .chars()
+                    .filter(|c| !c.is_whitespace())
+                    .collect::<String>(),
+                &self.haystack,
+            )?;
         }
         None
     }

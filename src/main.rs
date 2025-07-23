@@ -16,8 +16,6 @@ use std::io::stdout;
 use std::result::Result;
 
 fn main() -> Result<(), Error> {
-    let initial_query = env::args().nth(1).unwrap_or_default();
-
     let git = GitManager::new();
     let all_branches: &Vec<String> = &git
         .local_branches
@@ -39,6 +37,7 @@ fn main() -> Result<(), Error> {
     crossterm::terminal::enable_raw_mode().unwrap();
     let backend = CrosstermBackend::new(&mut stdout);
     let terminal = Terminal::new(backend).unwrap();
+    let initial_query = env::args().skip(1).collect::<Vec<String>>().join(" ");
     let mut ui = UI::new(
         |branch: &String| git.checkout(branch),
         keybinds,
